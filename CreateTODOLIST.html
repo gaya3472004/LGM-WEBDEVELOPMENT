@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <style>
+       
+        .todo-container {
+            background-color: #77f7;
+            border-radius: 10px;
+            box-shadow: 0 7px 9px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-header {
+            background-color: #3228db;
+            color: #fff;
+            padding: 15px;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 6px;
+        }
+
+        .todo-list {
+            padding: 1;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 20px;
+            background-color: #kif;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 1, 0, 0.1);
+        }
+
+        .todo-item label {
+            flex-grow: 1;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .todo-item input[type="checkbox"] {
+            margin-right: 2px;
+        }
+
+        .todo-item button {
+            background-color: #e74c3c;
+            color: #fssf;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .todo-item button:hover {
+            background-color: #c02b;
+        }
+
+        .add-todo {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .add-todo input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .add-todo button {
+            background-color: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .add-todo button:hover {
+            background-color: #219d54;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <div class="todo-header">
+            <h1 class="todo-header">To-Do List</h1>
+        </div>
+        <ul class="todo-list" id="taskList">
+            <!-- Tasks will be dynamically added here -->
+        </ul>
+        <div class="add-todo">
+            <input type="text" id="newTask" placeholder="New Task">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for adding and deleting tasks
+        function addTask() {
+            const taskText = document.getElementById('newTask').value;
+            if (taskText.trim() !== '') {
+                const taskList = document.getElementById('taskList');
+                const listItem = document.createElement('li');
+                listItem.className = 'todo-item';
+
+                const label = document.createElement('label');
+                label.textContent = taskText;
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function () {
+                    taskList.removeChild(listItem);
+                };
+
+                listItem.appendChild(label);
+                listItem.appendChild(checkbox);
+                listItem.appendChild(deleteButton);
+
+                taskList.appendChild(listItem);
+                document.getElementById('newTask').value = ''; // Clear input field
+            }
+        }
+    </script>
+</body>
+</html>
